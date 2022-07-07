@@ -5,10 +5,13 @@
         "password": "APIKEY",
         "topic": "v3/my-application@ttn/devices/eui-12345/up"
     },
-    "aprs-is": {
+    "aprs": {
         "callsign": "MYCALL-1",
+        "overlay": "/",
         "symbol": ">",
         "server": "euro.aprs2.net",
-        "passcode": "12345"
+        "port": 14580,
+        "passcode": 12345,
+        "message": "Hello world!"
     }
 }
