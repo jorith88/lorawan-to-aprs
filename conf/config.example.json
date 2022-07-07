@@ -1,0 +1,14 @@
+{
+    "mqtt": {
+        "url": "mqtt://eu1.cloud.thethings.network:1883",
+        "username": "my-application@ttn",
+        "password": "APIKEY",
+        "topic": "v3/my-application@ttn/devices/eui-12345/up"
+    },
+    "aprs-is": {
+        "callsign": "MYCALL-1",
+        "symbol": ">",
+        "server": "euro.aprs2.net",
+        "passcode": "12345"
+    }
+}
