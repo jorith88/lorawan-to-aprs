@@ -78,17 +78,12 @@ export class AprsIsService {
 
     // make it a decimal again and multiply by 60 to get decimal minutes
     ddLatRemainder = Number('0.' + ddLatVals[1]) * 60;
-    dmdLatMin = this.roundTo2(ddLatRemainder);
+    dmdLatMin = String(this.roundTo2(ddLatRemainder));
     ddLongRemainder = Number('0.' + ddLongVals[1]) * 60;
-    dmdLongMin = this.roundTo2(ddLongRemainder);
+    dmdLongMin = String(this.roundTo2(ddLongRemainder));
 
-    return `${dmdLatDeg.padStart(2, '0')}${dmdLatMin.padEnd(
-      4,
-      '0',
-    )}${dmdLatHem}${config.aprs.overlay}${dmdLongDeg.padStart(
-      3,
-      '0',
-    )}${dmdLongMin.padEnd(4, '0')}${dmdLongHem}`;
+    // eslint-disable-next-line prettier/prettier
+    return `${dmdLatDeg.padStart(2, '0')}${dmdLatMin.padEnd(5, '0')}${dmdLatHem}${config.aprs.overlay}${dmdLongDeg.padStart(3, '0')}${dmdLongMin.padEnd(5, '0')}${dmdLongHem}`;
   }
 
   // Round to x places
