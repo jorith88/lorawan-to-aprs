@@ -81,27 +81,14 @@ export class AprsIsService {
     dmdLatMin = this.roundTo2(ddLatRemainder);
     ddLongRemainder = Number('0.' + ddLongVals[1]) * 60;
     dmdLongMin = this.roundTo2(ddLongRemainder);
-    /* 		
-		dmdLongPads = ddLongRemainder.split(".");*/
-    //		dmdLongPads = dmdLongPad;
 
-    /*		if  (dmdLongPads[0].length == 2) {
-			dmdLongPadded = (dmdLongPads[0] + "." + dmdLongPads[1]); //dmdLongPad		
-			dmdLongMin.value = roundTo2(dmdLongPadded);
-		}*/
-    /*		
-		else if {
-			dmdLongPadded = ("0" + dmdLongPads[0] + "." + roundTo2(dmdLongPads[1]));
-			dmdLongMin.value = dmdLongPadded;
-		}
-			
-		else {
-			dmdLongMin.value = "?";
-		}*/
-
-    return `${dmdLatDeg.padStart(2, '0')}${dmdLatMin}${dmdLatHem}${
-      config.aprs.overlay
-    }${dmdLongDeg.padStart(3, '0')}${dmdLongMin}${dmdLongHem}`;
+    return `${dmdLatDeg.padStart(2, '0')}${dmdLatMin.padEnd(
+      4,
+      '0',
+    )}${dmdLatHem}${config.aprs.overlay}${dmdLongDeg.padStart(
+      3,
+      '0',
+    )}${dmdLongMin.padEnd(4, '0')}${dmdLongHem}`;
   }
 
   // Round to x places
