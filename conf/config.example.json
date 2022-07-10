@@ -1,9 +1,21 @@
 {
-    "mqtt": {
-        "url": "mqtt://eu1.cloud.thethings.network:1883",
-        "username": "my-application@ttn",
-        "password": "APIKEY",
-        "topic": "v3/my-application@ttn/devices/eui-12345/up"
+    "ttn": {
+        "active": true,
+        "mqtt": {
+            "url": "mqtt://eu1.cloud.thethings.network:1883",
+            "username": "my-application@ttn",
+            "password": "APIKEY",
+            "topic": "v3/my-application@ttn/devices/eui-12345/up"
+        }
+    },
+    "helium": {
+        "active": true,
+        "mqtt": {
+            "url": "mqtt://mqtt.example.com:1883",
+            "username": "username",
+            "password": "password",
+            "topic": "helium/9436b934-a5d4-4602-a2fb-e89f0ad72f29/rx"
+        }
     },
     "aprs": {
         "callsign": "MYCALL-1",

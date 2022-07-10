@@ -1,17 +1,32 @@
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
+import { TTNModule } from './ttn/ttn.module';
 import * as config from '../conf/config.json';
+import { HeliumModule } from './helium/helium.module';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice(AppModule, {
-    transport: Transport.MQTT,
-    options: {
-      url: config.mqtt.url,
-      username: config.mqtt.username,
-      password: config.mqtt.password,
-    },
-  });
-  await app.listen();
+  if (config.ttn.active) {
+    const ttn = await NestFactory.createMicroservice(TTNModule, {
+      transport: Transport.MQTT,
+      options: {
+        url: config.ttn.mqtt.url,
+        username: config.ttn.mqtt.username,
+        password: config.ttn.mqtt.password,
+      },
+    });
+    await ttn.listen();
+  }
+
+  if (config.helium.active) {
+    const ttn = await NestFactory.createMicroservice(HeliumModule, {
+      transport: Transport.MQTT,
+      options: {
+        url: config.helium.mqtt.url,
+        username: config.helium.mqtt.username,
+        password: config.helium.mqtt.password,
+      },
+    });
+    await ttn.listen();
+  }
 }
 bootstrap();
