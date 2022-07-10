@@ -18,7 +18,7 @@ async function bootstrap() {
   }
 
   if (config.helium.active) {
-    const ttn = await NestFactory.createMicroservice(HeliumModule, {
+    const helium = await NestFactory.createMicroservice(HeliumModule, {
       transport: Transport.MQTT,
       options: {
         url: config.helium.mqtt.url,
@@ -26,7 +26,7 @@ async function bootstrap() {
         password: config.helium.mqtt.password,
       },
     });
-    await ttn.listen();
+    await helium.listen();
   }
 }
 bootstrap();
