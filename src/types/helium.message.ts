@@ -1,4 +1,4 @@
-import { DevicePayload } from "./DevicePayload";
+import { DevicePayload } from "./device.payload";
 
 export interface Dc {
     balance: number;
