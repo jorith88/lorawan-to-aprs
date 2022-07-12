@@ -4,3 +4,5 @@ services:
       dockerfile: Dockerfile
       context: .
     restart: unless-stopped
+    volumes:
+      - ./conf/config.json:/usr/src/app/dist/conf/config.json
