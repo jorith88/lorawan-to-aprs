@@ -1,18 +1,12 @@
+import { DevicePayload } from "./DevicePayload";
+
 export interface Dc {
     balance: number;
     nonce: number;
 }
 
-export interface Payload {
-    altitude: number;
-    hdop: number;
-    latitude: number;
-    longitude: number;
-    sats: number;
-}
-
 export interface Decoded {
-    payload: Payload;
+    payload: DevicePayload;
     status: string;
 }
 

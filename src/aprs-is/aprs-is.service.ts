@@ -1,14 +1,14 @@
 /* eslint-disable prefer-const */
 import { Injectable } from '@nestjs/common';
 import { ISSocket } from 'js-aprs-is';
-import { DeviceLocation } from 'src/types/ttn.message';
+import { DevicePayload } from 'src/types/device.payload';
 import * as config from '../../conf/config.json';
 
 @Injectable()
 export class AprsIsService {
-  async sendLocationUpdate(location: DeviceLocation) {
+  async sendLocationUpdate(payload: DevicePayload) {
     console.log('Send location update to APRS-IS');
-    const aprsMessage = this.createAprsMessage(location);
+    const aprsMessage = this.createAprsMessage(payload);
 
     console.log(aprsMessage);
     this.send(aprsMessage);
@@ -35,13 +35,19 @@ export class AprsIsService {
     connection.connect();
   }
 
-  private createAprsMessage(location: DeviceLocation) {
-    const aprsCoordinates = this.createAprsCoordinates(location);
+  private createAprsMessage(payload: DevicePayload) {
+    const aprsCoordinates = this.createAprsCoordinates(payload);
 
-    return `${config.aprs.callsign}>APRS,TCPIP*,qAC:!${aprsCoordinates}${config.aprs.symbol}${config.aprs.message}`;
+    let message = `${config.aprs.callsign}>APRS,TCPIP*,qAC:!${aprsCoordinates}${config.aprs.symbol}${config.aprs.message}`;
+
+    if (payload.battery) {
+      message += ` - Batt: ${payload.battery}V`
+    }
+
+    return message;
   }
 
-  private createAprsCoordinates(location: DeviceLocation) {
+  private createAprsCoordinates(payload: DevicePayload) {
     // Change "http://www.maps.com/directions/address/simple_address.html" coords to Magellan GPS 310 coords.
 
     let dmdLatHem, dmdLongHem;
@@ -50,8 +56,8 @@ export class AprsIsService {
     let dmdLatDeg, dmdLatMin;
     let dmdLongDeg, dmdLongMin;
     let ddLatRemainder, ddLongRemainder;
-    const ddLat = String(location.latitude),
-      ddLong = String(location.longitude);
+    const ddLat = String(payload.latitude),
+      ddLong = String(payload.longitude);
 
     // Check for southern hemisphere values
     if (ddLat.substring(0, 1) == '-') {

@@ -1,3 +1,5 @@
+import { DevicePayload } from "./DevicePayload";
+
 export interface ApplicationIds {
   application_id: string;
 }
@@ -8,14 +10,6 @@ export interface EndDeviceIds {
   dev_eui: string;
   join_eui: string;
   dev_addr: string;
-}
-
-export interface DeviceLocation {
-  altitude: number;
-  hdop: number;
-  latitude: number;
-  longitude: number;
-  sats: number;
 }
 
 export interface GatewayIds {
@@ -82,7 +76,7 @@ export interface UplinkMessage {
   f_port: number;
   f_cnt: number;
   frm_payload: string;
-  decoded_payload: DeviceLocation;
+  decoded_payload: DevicePayload;
   rx_metadata: RxMetadata[];
   settings: Settings;
   received_at: string;
