@@ -18,6 +18,12 @@ export class TTNController {
     @Payload() data: TTNMessage,
     @Ctx() context: MqttContext,
   ) {
+    console.log(`Received message from TTN`);
+    for (const rxMetadata of data.uplink_message.rx_metadata) {
+      console.log(
+        `    - ${rxMetadata.gateway_ids.gateway_id} with RSSI ${rxMetadata.rssi} and SNR ${rxMetadata.snr}`,
+      );
+    }
     this.aprsIsService.sendLocationUpdate(data.uplink_message.decoded_payload);
   }
 }
