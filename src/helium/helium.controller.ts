@@ -18,6 +18,12 @@ export class HeliumController {
     @Payload() data: HeliumMessage,
     @Ctx() context: MqttContext,
   ) {
+    console.log(`Received message from Helium at ${data.reported_at}`);
+    for (const hotspot of data.hotspots) {
+      console.log(
+        `    - ${hotspot.name} with RSSI ${hotspot.rssi} and SNR ${hotspot.snr}`,
+      );
+    }
     this.aprsIsService.sendLocationUpdate(data.decoded.payload);
   }
 }

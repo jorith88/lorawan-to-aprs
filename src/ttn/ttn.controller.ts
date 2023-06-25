@@ -18,7 +18,7 @@ export class TTNController {
     @Payload() data: TTNMessage,
     @Ctx() context: MqttContext,
   ) {
-    console.log(`Received message from TTN`);
+    console.log(`Received message from TTN at ${data.uplink_message.received_at}`);
     for (const rxMetadata of data.uplink_message.rx_metadata) {
       console.log(
         `    - ${rxMetadata.gateway_ids.gateway_id} with RSSI ${rxMetadata.rssi} and SNR ${rxMetadata.snr}`,
